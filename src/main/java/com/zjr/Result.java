@@ -4,6 +4,8 @@ package com.zjr;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 
+import java.io.Serializable;
+
 /**
  * 指定对象及格式
  * @author 张杰荣
@@ -13,7 +15,7 @@ import com.alibaba.excel.annotation.write.style.ColumnWidth;
  * @createTime 2022年08月30日 14:01
  */
 
-public class Result {
+public class Result implements Serializable {
 
     //标题
     @ColumnWidth(67)

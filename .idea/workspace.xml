@@ -10,8 +10,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -42,6 +50,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "MavenSettings"
   }
 }]]></component>
@@ -51,12 +60,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="AnalysisMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="com.zjr.AnalysisMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.zjr.AnalysisMain" />
       <module name="bloganalysis" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.zjr.*" />
+          <option name="PATTERN" value="com.zjr.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -66,7 +75,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AnalysisMain" />
+        <item itemvalue="Application.com.zjr.AnalysisMain" />
       </list>
     </recent_temporary>
   </component>
@@ -79,10 +88,52 @@
       <option name="presentableId" value="Default" />
       <updated>1661965948995</updated>
       <workItem from="1661965950322" duration="1609000" />
+      <workItem from="1661993421152" duration="6972000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="bc4110d1-1644-430f-9ea4-f73d164ea9e0">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="bc4110d1-1644-430f-9ea4-f73d164ea9e0" value="TOOL_WINDOW" />
+      </map>
+    </option>
   </component>
 </project>

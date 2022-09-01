@@ -1,6 +1,7 @@
-package com.zjr;
+package com.zjr.util;
 
 import com.alibaba.excel.EasyExcel;
+import com.zjr.Result;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ExcelWriteUtils {
     public static void writeExcel(List<Result> results)
     {
     //文件路径和文件名称
-    String fileName = "D:\\圈量文章2.xlsx";
+    String fileName = ".\\圈量文章2.xlsx";
     //实现写操作
     EasyExcel.write(fileName,Result.class).sheet("圈量").doWrite(results);
 
