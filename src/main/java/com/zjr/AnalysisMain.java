@@ -33,7 +33,7 @@ import java.util.Scanner;
 
 public class AnalysisMain {
 
-    public static final Logger logger= LoggerFactory.getLogger(AnalysisMain.class);
+    public static final Logger logger = LoggerFactory.getLogger(AnalysisMain.class);
     //解析网址
     public static final String STAR_URL = "https://www.aquanliang.com/blog";
 
@@ -50,7 +50,6 @@ public class AnalysisMain {
 
             //判断用户的指令是执行还是退出
             if ("0".equals(s)) {
-
                 flag = false;
 
             } else if ("go".equals(s)) {
@@ -64,12 +63,13 @@ public class AnalysisMain {
                 //获得页数
                 int i = LastPage(parse);
 
-                //创建list，用于存储所有扫描到的result对象
+/*                //创建list，用于存储所有扫描到的result对象
                 List<Result> results = new ArrayList<>();
                 List<Result> list = service(STAR_URL, results, i);
 
                 //使用工具类对列表对象写入excel
-                ExcelWriteUtils.writeExcel(list);
+                ExcelWriteUtils.writeExcel(list);*/
+                serviceFun2(STAR_URL, i);
                 System.out.println("解析完成");
             }
         }
@@ -124,7 +124,7 @@ public class AnalysisMain {
      * @return
      * @author Zjr
      * @createTime 2022/8/31 14:37
-     * @deprecated 单页解析
+     * @deprecated 单页解析 先全部信息存入list，再全部信息存入excel
      */
 
     public static List<Result> service(String html, List<Result> results, int lastPage) {
@@ -273,7 +273,7 @@ public class AnalysisMain {
      * @return
      * @author Zjr
      * @createTime 2022/8/31 14:38
-     * @deprecated 获取当前下一页按钮是否激活，可用于判断是否是最后一页。暂时不用
+     * @deprecated 获取最后一页
      */
     public static int LastPage(Document parse) {
 
@@ -311,18 +311,22 @@ public class AnalysisMain {
         int modelNum = page.size();
         return modelNum;
     }
-/*
 
-    *//**
-     暂时不用
+
+
+
+    /**
      * @param
      * @return
      * @author Zjr
      * @createTime 2022/8/31 14:37
-     * @deprecated 单页解析
-     *//*
+     * @deprecated 单页解析 先一页一页存入list，再存入excel，再存下一页
+     */
 
-    public static List<Result> jediService(String html, List<Result> results ,int lastPage) {
+    public static void serviceFun2(String html, int lastPage) {
+
+        List<Result> results= new ArrayList<Result>();
+
         //获取当前页数
         int page;
 
@@ -336,7 +340,7 @@ public class AnalysisMain {
             page = Integer.parseInt(s);
         }
 
-        System.out.println("开始遍历第" + page + "页");
+        logger.info("开始遍历第" + page + "页");
 
         //获得页面所有内容
         String body = getBodyByUrl(html);
@@ -347,10 +351,9 @@ public class AnalysisMain {
         // 如果为空，则重新请求回调该方法。
         // 因此处还没将该页数据存入list，所以回调不会造成数据冗余和丢失。
         if (body == null || "".equals(body)) {
+            serviceFun2(STAR_URL + "/page/" + page,  lastPage);
+            return;
 
-            jediService(STAR_URL + "/page/" + page,results, lastPage);
-
-            return null;
         }
 
         body = getBodyByUrl(html);
@@ -369,11 +372,10 @@ public class AnalysisMain {
             //如果依旧为空，则休眠后回调该方法，重新获取页面
             if (box == null) {
 
-                System.out.println("第" + page + "页获取不到box，将重新刷新，继续获取");
+                logger.info("第" + page + "页获取不到box，将重新刷新，继续获取");
 
-                jediService(STAR_URL + "/page/" + page,results, lastPage);
-
-                return null;
+                serviceFun2(STAR_URL + "/page/" + page,  lastPage);
+                return;
             }
         }
 
@@ -434,17 +436,33 @@ public class AnalysisMain {
             //创建对象，将以上得到的内容，塞进list
             results.add(new Result(titleStr, timeStr, volume, imgStr));
         }
-
-        //刚刚判断是否不是最后一页，
+        //存入excel
+        if (results.size()!=modelNum){
+            serviceFun2(STAR_URL + "/page/" + (page + 1), lastPage);
+        }
+        //如果是第一页，则创建文件并存入
+        if (page == 1){
+            ExcelWriteUtils.writeExcel(results);
+        }else {
+            //如果不是，则在原文件的基础上追加数据
+            ExcelWriteUtils.insertExcel(results);
+        }
+        //判断是否不是最后一页，
         // 此处可以利用网址参数进行页数修改，使用递归的方式遍历获取下一页内容，直至最后一页
         if (flag) {
-            jediService(STAR_URL + "/page/" + (page + 1), results,lastPage);
+            serviceFun2(STAR_URL + "/page/" + (page + 1), lastPage);
         }
-        return results;
-    }
-    */
 
-        
+
     }
+
+
+
+
+
+
+
+
+}
 
 
